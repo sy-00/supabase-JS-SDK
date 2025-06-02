@@ -38,14 +38,10 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: |
-          cd vite-multipage-starter
-          npm install
+        run: npm install
 
       - name: Build vite-multipage-starter
-        run: |
-          cd vite-multipage-starter
-          npm run build -- --base=/supabase-JS-SDK/
+        run: npm run build -- --base=/supabase-JS-SDK/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
