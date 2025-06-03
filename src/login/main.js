@@ -15,9 +15,9 @@ form.addEventListener('submit', async (event) => {
   });
 
   if (error) {
-    message.textContent = 'Błędne dane logowania.';
+    message.textContent = 'Błędne dane logowania';
   } else {
-    message.textContent = 'Zalogowano.'
+    message.textContent = 'Trwa przekierowywanie...'
     setTimeout(() => {
       window.location.href = '../index.html';
     }, 1000);

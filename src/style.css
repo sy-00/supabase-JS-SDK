@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #F08650;
+    --color-hovering: #9C5734;
+}
