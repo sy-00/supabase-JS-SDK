@@ -50,6 +50,7 @@ async function main() {
         <time datetime="${article.created_at}">
           ${new Date(article.created_at).toLocaleDateString()}
         </time>
+        <p class="mb-4">${article.content}</p>
       </div>
     </article>
   `).join('\n');
