@@ -45,6 +45,7 @@ async function main() {
   const articlesList = data.map((article) => `
     <article class="article">
       <h2 class="text-xl font-semibold">${article.title}</h2>
+      <h3>${article.subtitle}</h3>
       <div class="text-sm text-gray-600">
         <address class="not-italic" rel="author">${article.author}</address>
         <time datetime="${article.created_at}">
