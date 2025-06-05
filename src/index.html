@@ -16,6 +16,29 @@
       <h1 class="font-bold txt-2xl">Najnowsze artykuły</h1>
       <div class="articles flex flex-col"></div>
     </main>
+    
+    <div id="edit-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div class="bg-white p-6 rounded w-full max-w-md">
+        <h2 class="text-xl mb-4">Edytuj artykuł</h2>
+        <form id="edit-form">
+          <input type="hidden" id="edit-id" />
+          <label>Tytuł:</label>
+          <input type="text" id="edit-title" class="w-full border mb-2 p-2" required />
+
+          <label>Treść:</label>
+          <textarea id="edit-content" class="w-full border mb-2 p-2" required></textarea>
+
+          <label>Autor:</label>
+          <input type="text" id="edit-author" class="w-full border mb-4 p-2" required />
+
+          <div class="flex justify-end gap-2">
+            <button type="button" id="cancel-edit" class="bg-secondary hover:bg-hovering px-4 py-2 rounded hover:text-white cursor-pointer">Anuluj</button>
+            <button type="submit" class="bg-primary hover:bg-hovering px-4 py-2 rounded hover:text-white cursor-pointer">Zapisz</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

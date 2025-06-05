@@ -31,9 +31,10 @@ logoutButton.addEventListener('click', async () => {
 main();
 
 async function main() {
-  const { data, error } = await supabase
-    .from('article')
-    .select('*');
+  const [{ data: articles, error }, { data: { session } }] = await Promise.all([
+    supabase.from('article').select('*'),
+    supabase.auth.getSession()
+  ]);
 
   if (error) {
     console.error('Fetch error:', error);
@@ -42,10 +43,10 @@ async function main() {
 
   const articlesContainer = document.querySelector('.articles');
 
-  const articlesList = data.map((article) => `
-    <article class="article">
+  const articlesList = articles.map((article) => `
+    <article class="article" data-id="${article.id}">
       <h2 class="text-xl font-semibold">${article.title}</h2>
-      <h3>${article.subtitle}</h3>
+      <h3>${article.subtitle || ''}</h3>
       <div class="text-sm text-gray-600">
         <address class="not-italic" rel="author">${article.author}</address>
         <time datetime="${article.created_at}">
@@ -53,8 +54,57 @@ async function main() {
         </time>
         <p class="mb-4">${article.content}</p>
       </div>
+      ${session ? `<button class="edit-btn bg-primary hover:bg-hovering px-3 py-1 rounded hover:text-white cursor-pointer">Edytuj</button>` : ''}
     </article>
   `).join('\n');
 
   articlesContainer.innerHTML = articlesList;
 }
+
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('edit-btn')) {
+    const articleEl = e.target.closest('.article');
+    const id = articleEl.dataset.id;
+
+    const { data: article, error } = await supabase.from('article').select('*').eq('id', id).single();
+
+    if (error) {
+      console.error('Błąd pobierania artykułu');
+      return;
+    }
+
+    document.getElementById('edit-id').value = article.id;
+    document.getElementById('edit-title').value = article.title;
+    document.getElementById('edit-content').value = article.content;
+    document.getElementById('edit-author').value = article.author;
+
+    document.getElementById('edit-modal').classList.remove('hidden');
+  }
+});
+
+document.getElementById('cancel-edit').addEventListener('click', () => {
+  document.getElementById('edit-modal').classList.add('hidden');
+});
+
+document.getElementById('edit-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById('edit-id').value;
+  const title = document.getElementById('edit-title').value;
+  const content = document.getElementById('edit-content').value;
+  const author = document.getElementById('edit-author').value;
+  const updated_at = new Date().toISOString();
+
+  const { error } = await supabase
+    .from('article')
+    .update({ title, content, author, created_at: updated_at })
+    .eq('id', id);
+
+  if (error) {
+    console.error('Błąd aktualizacji artykułu');
+    return;
+  }
+
+  document.getElementById('edit-modal').classList.add('hidden');
+  main();
+});
