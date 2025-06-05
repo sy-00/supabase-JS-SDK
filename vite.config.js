@@ -18,7 +18,7 @@ export default defineConfig({
     tailwindcss(),
   ],
 
-  base: '/supabase-JS-SDK/',
+  //base: '/supabase-JS-SDK/',
 
   root: resolve(__dirname, 'src'),
   build: {
@@ -28,4 +28,4 @@ export default defineConfig({
     },
     outDir: resolve(__dirname, 'dist'),
   },
-})
+})  
