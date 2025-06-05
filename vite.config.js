@@ -18,6 +18,8 @@ export default defineConfig({
     tailwindcss(),
   ],
 
+  base: 'supabase-JS-SDK',
+
   root: resolve(__dirname, 'src'),
   build: {
     emptyOutDir: true,
