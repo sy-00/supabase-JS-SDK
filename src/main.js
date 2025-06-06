@@ -32,7 +32,7 @@ main();
 
 async function main() {
   const [{ data: articles, error }, { data: { session } }] = await Promise.all([
-    supabase.from('article').select('*'),
+    supabase.from('article').select('*').order('created_at', { ascending: false}),
     supabase.auth.getSession()
   ]);
 
