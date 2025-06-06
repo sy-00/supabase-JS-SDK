@@ -29,7 +29,7 @@ logoutButton.addEventListener('click', async () => {
 
   if (!error) {
     alert('Nastąpiło wylogowanie');
-    window.location.href = '/login/';
+    window.location.href = 'login/';
   } else {
     console.error('Błąd podczas wylogowywania');
   }
@@ -152,7 +152,7 @@ const addModal = document.getElementById('add-modal')
 addButton.addEventListener('click', async () => {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) {
-    window.location.href = '/login/';
+    window.location.href = 'login/';
     return;
   }
 
