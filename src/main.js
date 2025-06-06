@@ -1,6 +1,7 @@
 import { supabase } from './api-client.js';
 
 const logoutButton = document.getElementById('logout-button');
+const loginRedirect = document.getElementById('login-redirect');
 
 supabase.auth.onAuthStateChange((_event, session) => {
   handleSession(session);
@@ -9,8 +10,10 @@ supabase.auth.onAuthStateChange((_event, session) => {
 function handleSession(session) {
   if (session) {
     logoutButton.classList.remove('hidden');
+    loginRedirect.classList.add('hidden');
   } else {
     logoutButton.classList.add('hidden');
+    loginRedirect.classList.remove('hidden');
   }
 }
 
@@ -43,19 +46,24 @@ async function main() {
 
   const articlesContainer = document.querySelector('.articles');
 
+  const leafIcon = `<img src="https://marketplace.canva.com/ARZ8E/MAFmAUARZ8E/1/tl/canva-natural-leaf-icon.-100%25-naturals-vector-image-MAFmAUARZ8E.png" alt="leaf icon" class="mr-3 w-6 h-6 flex-shrink-0" aria-hidden="true">`;
+
   const articlesList = articles.map((article) => `
-    <article class="article" data-id="${article.id}">
+    <article class="article py-6 border-b-10 border-white grid grid-cols-[auto_1fr] gap-x-3 items-center bg-secondary/50 rounded p-6" data-id="${article.id}">
+    ${leafIcon}
       <h2 class="text-xl font-semibold">${article.title}</h2>
-      <h3>${article.subtitle || ''}</h3>
-      <div class="text-sm text-gray-600">
-        <address class="not-italic" rel="author">${article.author}</address>
+      <h3 class="col-start-2 col-span-1 mt-2">${article.subtitle || ''}</h3>
+      <div class="text-sm text-black/70 col-start-2 col-span-1 mt-2">
+        <address class="not-italic mt-1.5" rel="author">${article.author}</address>
         <time datetime="${article.created_at}">
           ${new Date(article.created_at).toLocaleDateString()}
         </time>
-        <p class="mb-4">${article.content}</p>
-      </div>
-      ${session ? `<button class="edit-btn bg-primary hover:bg-hovering px-3 py-1 rounded hover:text-white cursor-pointer">Edytuj</button>
-        <button class="delete-button bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 ml-2 cursor-pointer">Usuń artykuł</button>` : ''}
+        <p class="mb-4 mt-1.5">${article.content}</p>
+      </div">
+        <div class="flex">
+        ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-white cursor-pointer">Edytuj</button>
+          <button class="delete-button bg-secondary text-white px-3 py-1 rounded hover:bg-hoveringS ml-2 cursor-pointer">Usuń artykuł</button>` : ''}
+        </div>
     </article>
   `).join('\n');
 
@@ -63,7 +71,7 @@ async function main() {
 }
 
 document.addEventListener('click', async (e) => {
-  if (e.target.classList.contains('edit-btn')) {
+  if (e.target.classList.contains('edit-button')) {
     const articleEl = e.target.closest('.article');
     const id = articleEl.dataset.id;
 
