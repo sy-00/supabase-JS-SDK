@@ -17,8 +17,12 @@ function handleSession(session) {
   }
 }
 
-const { data: { session } } = await supabase.auth.getSession();
-handleSession(session);
+async function init() {
+  const { data: { session } } = await supabase.auth.getSession();
+  handleSession(session);
+}
+
+init();
 
 logoutButton.addEventListener('click', async () => {
   const { error } = await supabase.auth.signOut();
