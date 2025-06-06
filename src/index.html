@@ -40,13 +40,14 @@
         <h2 class="text-xl mb-4">Edytuj artykuł</h2>
         <form id="edit-form">
           <input type="hidden" id="edit-id" />
-          <label>Tytuł:</label>
+
+          <label for="edit-title">Tytuł:</label>
           <input type="text" id="edit-title" class="w-full border mb-2 p-2" required />
 
-          <label>Treść:</label>
+          <label for="edit-content">Treść:</label>
           <textarea id="edit-content" class="w-full border mb-2 p-2" required></textarea>
 
-          <label>Autor:</label>
+          <label for="edit-author">Autor:</label>
           <input type="text" id="edit-author" class="w-full border mb-4 p-2" required />
 
           <div class="flex flex-col sm:flex-row justify-end gap-2">
