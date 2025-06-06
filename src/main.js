@@ -54,7 +54,8 @@ async function main() {
         </time>
         <p class="mb-4">${article.content}</p>
       </div>
-      ${session ? `<button class="edit-btn bg-primary hover:bg-hovering px-3 py-1 rounded hover:text-white cursor-pointer">Edytuj</button>` : ''}
+      ${session ? `<button class="edit-btn bg-primary hover:bg-hovering px-3 py-1 rounded hover:text-white cursor-pointer">Edytuj</button>
+        <button class="delete-button bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 ml-2 cursor-pointer">Usuń artykuł</button>` : ''}
     </article>
   `).join('\n');
 
@@ -107,4 +108,28 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
 
   document.getElementById('edit-modal').classList.add('hidden');
   main();
+});
+
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('delete-button')) {
+    const articleEl = e.target.closest('.article');
+    const id = articleEl.dataset.id;
+
+    const confirmed = confirm('Czy na pewno chcesz usunąć ten artykuł?');
+
+    if(!confirmed) return;
+    
+    const { error } = await supabase
+    .from('article')
+    .delete()
+    .eq('id', id);
+
+    if (error) {
+      console.error("Błąd podczas usuwania artykułu")
+      return;
+    }
+
+    alert('Artykuł został usunięty');
+    main();
+  }
 });
