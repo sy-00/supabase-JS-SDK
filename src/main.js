@@ -133,3 +133,42 @@ document.addEventListener('click', async (e) => {
     main();
   }
 });
+
+const addButton = document.getElementById('add-article-button');
+const addModal = document.getElementById('add-modal')
+
+addButton.addEventListener('click', async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    window.location.href = '/login/';
+    return;
+  }
+
+  addModal.classList.remove('hidden');
+});
+
+document.getElementById('cancel-add').addEventListener('click', () => {
+  addModal.classList.add('hidden')
+});
+
+document.getElementById('add-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById('add-title').value;
+  const content = document.getElementById('add-content').value;
+  const author = document.getElementById('add-author').value;
+  const created_at = new Date().toISOString();
+
+  const { error } = await supabase.from('article').insert([
+    { title, content, author, created_at }
+  ]);
+
+  if (error) {
+    console.error('Błąd dodawania artykułu')
+    return;
+  }
+
+  addModal.classList.add('hidden');
+  document.getElementById('add-form').reset();
+  main();
+});

@@ -15,6 +15,10 @@
       </nav>
       <h1 class="font-bold txt-2xl">Najnowsze artykuły</h1>
       <div class="articles flex flex-col"></div>
+
+      <div class="text-right m-4">
+        <button id="add-article-button" class="bg-primary hover:bg-hovering text-white px-4 py-2 rounded cursor-pointer">Dodaj artykuł</button>
+      </div>
     </main>
     
     <div id="edit-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -34,6 +38,23 @@
           <div class="flex justify-end gap-2">
             <button type="button" id="cancel-edit" class="bg-secondary hover:bg-hovering px-4 py-2 rounded hover:text-white cursor-pointer">Anuluj</button>
             <button type="submit" class="bg-primary hover:bg-hovering px-4 py-2 rounded hover:text-white cursor-pointer">Zapisz</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="add-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+      <div class="bg-white p-6 rounded w-full max-w-lg">
+        <form id="add-form" class="space-y-4">
+          <h2 class="text-xl font-semibold">Nowy artykuł</h2>
+
+          <input type="text" id="add-title" placeholder="Tytuł" required class="w-full border px-3 py-2 rounded" />
+          <textarea id="add-content" placeholder="Treść" required class="w-full border px-3 py-2 rounded"></textarea>
+          <input type="text" id="add-author" placeholder="Autor" required class="w-full border px-3 py-2 rounded" />
+
+          <div class="flex justify-end space-x-2">
+            <button type="button" id="cancel-add" class="px-4 py-2 bg-secondary hover:bg-hovering rounded cursor-pointer">Anuluj</button>
+            <button type="submit" class="px-4 py-2 bg-primary hover:bg-hovering rounded cursor-pointer">Dodaj</button>
           </div>
         </form>
       </div>
