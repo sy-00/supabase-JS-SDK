@@ -65,8 +65,8 @@ async function main() {
         <p class="mb-4 mt-1.5 whitespace-pre-wrap">${article.content}</p>
       </div">
         <div class="flex">
-        ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-white cursor-pointer">Edytuj</button>
-          <button class="delete-button bg-secondary text-white px-3 py-1 rounded hover:bg-hoveringS ml-2 cursor-pointer">Usuń artykuł</button>` : ''}
+        ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-white cursor-pointer">Edit</button>
+          <button class="delete-button bg-secondary text-white px-3 py-1 rounded hover:bg-hoveringS ml-2 cursor-pointer">Delete</button>` : ''}
         </div>
     </article>
   `).join('\n');
@@ -88,6 +88,7 @@ document.addEventListener('click', async (e) => {
 
     document.getElementById('edit-id').value = article.id;
     document.getElementById('edit-title').value = article.title;
+    document.getElementById('edit-subtitle').value = article.subtitle;
     document.getElementById('edit-content').value = article.content;
     document.getElementById('edit-author').value = article.author;
 
@@ -104,13 +105,14 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
 
   const id = document.getElementById('edit-id').value;
   const title = document.getElementById('edit-title').value;
+  const subtitle = document.getElementById('edit-subtitle').value;
   const content = document.getElementById('edit-content').value;
   const author = document.getElementById('edit-author').value;
   const updated_at = new Date().toISOString();
 
   const { error } = await supabase
     .from('article')
-    .update({ title, content, author, created_at: updated_at })
+    .update({ title, subtitle, content, author, created_at: updated_at })
     .eq('id', id);
 
   if (error) {
@@ -167,12 +169,13 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const title = document.getElementById('add-title').value;
+  const subtitle = document.getElementById('add-subtitle').value;
   const content = document.getElementById('add-content').value;
   const author = document.getElementById('add-author').value;
   const created_at = new Date().toISOString();
 
   const { error } = await supabase.from('article').insert([
-    { title, content, author, created_at }
+    { title, subtitle, content, author, created_at }
   ]);
 
   if (error) {
