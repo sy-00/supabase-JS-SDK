@@ -15,9 +15,11 @@ form.addEventListener('submit', async (event) => {
   });
 
   if (error) {
-    message.textContent = 'Błędne dane logowania';
+    message.textContent = 'Invalid login credentials';
+    message.classList.add('text-red-500');
   } else {
-    message.textContent = 'Trwa przekierowywanie...'
+    message.classList.remove('text-red-500');
+    message.textContent = 'Redirecting...'
     setTimeout(() => {
       window.location.href = '../index.html';
     }, 1000);

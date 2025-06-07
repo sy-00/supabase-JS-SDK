@@ -28,10 +28,10 @@ logoutButton.addEventListener('click', async () => {
   const { error } = await supabase.auth.signOut();
 
   if (!error) {
-    alert('Nastąpiło wylogowanie');
+    alert('You have been logged out');
     window.location.href = 'login/';
   } else {
-    console.error('Błąd podczas wylogowywania');
+    console.error('An error occurred while logging out');
   }
 });
 
@@ -82,7 +82,7 @@ document.addEventListener('click', async (e) => {
     const { data: article, error } = await supabase.from('article').select('*').eq('id', id).single();
 
     if (error) {
-      console.error('Błąd pobierania artykułu');
+      console.error('Failed to fetch the article');
       return;
     }
 
@@ -114,7 +114,7 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
     .eq('id', id);
 
   if (error) {
-    console.error('Błąd aktualizacji artykułu');
+    console.error('Failed to update the article');
     return;
   }
 
@@ -127,7 +127,7 @@ document.addEventListener('click', async (e) => {
     const articleEl = e.target.closest('.article');
     const id = articleEl.dataset.id;
 
-    const confirmed = confirm('Czy na pewno chcesz usunąć ten artykuł?');
+    const confirmed = confirm('Are you sure you want to delete this article?');
 
     if(!confirmed) return;
     
@@ -137,11 +137,11 @@ document.addEventListener('click', async (e) => {
     .eq('id', id);
 
     if (error) {
-      console.error("Błąd podczas usuwania artykułu")
+      console.error("Failed to delete the article")
       return;
     }
 
-    alert('Artykuł został usunięty');
+    alert('Article deleted');
     main();
   }
 });
@@ -176,7 +176,7 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
   ]);
 
   if (error) {
-    console.error('Błąd dodawania artykułu')
+    console.error('Failed to add the article')
     return;
   }
 
