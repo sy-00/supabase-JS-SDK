@@ -62,7 +62,7 @@ async function main() {
         <time datetime="${article.created_at}">
           ${new Date(article.created_at).toLocaleDateString()}
         </time>
-        <p class="mb-4 mt-1.5">${article.content}</p>
+        <p class="mb-4 mt-1.5 whitespace-pre-wrap">${article.content}</p>
       </div">
         <div class="flex">
         ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-white cursor-pointer">Edytuj</button>
