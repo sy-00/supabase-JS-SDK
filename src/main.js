@@ -184,3 +184,17 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
   document.getElementById('add-form').reset();
   main();
 });
+
+addModal.addEventListener('click', (e) => {
+  if (e.target === addModal) {
+    addModal.classList.add('hidden');
+  }
+});
+
+const editModal = document.getElementById('edit-modal');
+
+editModal.addEventListener('click', (e) => {
+  if (e.target === editModal) {
+    editModal.classList.add('hidden');
+  }
+});
