@@ -53,7 +53,7 @@ async function main() {
   const leafIcon = `<img src="https://marketplace.canva.com/ARZ8E/MAFmAUARZ8E/1/tl/canva-natural-leaf-icon.-100%25-naturals-vector-image-MAFmAUARZ8E.png" alt="leaf icon" class="mr-3 w-6 h-6 flex-shrink-0" aria-hidden="true">`;
 
   const articlesList = articles.map((article) => `
-    <article class="article py-6 border-b-10 border-white grid grid-cols-[auto_1fr] gap-x-3 items-center bg-secondary/50 rounded p-6" data-id="${article.id}">
+    <article class="article py-6 border-b-10 border-pageBG grid grid-cols-[auto_1fr] gap-x-3 items-center bg-secondary/50 rounded p-6" data-id="${article.id}">
     ${leafIcon}
       <h2 class="text-xl font-semibold">${article.title}</h2>
       <h3 class="col-start-2 col-span-1 mt-2">${article.subtitle || ''}</h3>
@@ -65,8 +65,8 @@ async function main() {
         <p class="mb-4 mt-1.5 whitespace-pre-wrap">${article.content}</p>
       </div">
         <div class="flex">
-        ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-white cursor-pointer">Edit</button>
-          <button class="delete-button bg-secondary text-white px-3 py-1 rounded hover:bg-hoveringS ml-2 cursor-pointer">Delete</button>` : ''}
+        ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-almostwhite cursor-pointer">Edit</button>
+          <button class="delete-button bg-secondary text-almostwhite px-3 py-1 rounded hover:bg-hoveringS ml-2 cursor-pointer">Delete</button>` : ''}
         </div>
     </article>
   `).join('\n');
