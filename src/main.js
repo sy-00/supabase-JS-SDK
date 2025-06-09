@@ -62,7 +62,7 @@ const articlesList = articles.map((article) => `
         <p class="mb-4 mt-1.5 whitespace-pre-wrap">${article.content}</p>
       </div>
     </div>
-    <div class="col-span-2 row-start-2 flex space-x-2">
+    <div class="col-start-2 row-start-2 flex space-x-2">
       ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-almostwhite cursor-pointer">Edit</button>
       <button class="delete-button bg-secondary text-almostwhite px-3 py-1 rounded hover:bg-hoveringS cursor-pointer">Delete</button>` : ''}
     </div>
