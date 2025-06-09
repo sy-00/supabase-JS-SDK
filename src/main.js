@@ -35,8 +35,6 @@ logoutButton.addEventListener('click', async () => {
   }
 });
 
-main();
-
 async function main() {
   const [{ data: articles, error }, { data: { session } }] = await Promise.all([
     supabase.from('article').select('*').order('created_at', { ascending: false}),
@@ -52,27 +50,29 @@ async function main() {
 
   const leafIcon = `<img src="https://marketplace.canva.com/ARZ8E/MAFmAUARZ8E/1/tl/canva-natural-leaf-icon.-100%25-naturals-vector-image-MAFmAUARZ8E.png" alt="leaf icon" class="mr-3 w-6 h-6 flex-shrink-0" aria-hidden="true">`;
 
-  const articlesList = articles.map((article) => `
-    <article class="article py-6 border-b-10 border-pageBG grid grid-cols-[auto_1fr] gap-x-3 items-center bg-secondary/50 rounded p-6" data-id="${article.id}">
+const articlesList = articles.map((article) => `
+  <article class="article py-6 border-b-10 border-pageBG bg-secondary/50 rounded p-6 grid grid-cols-[auto_1fr] grid-rows-[auto_auto] gap-x-3 gap-y-2" data-id="${article.id}">
     ${leafIcon}
+    <div class="col-start-2 row-start-1">
       <h2 class="text-xl font-semibold">${article.title}</h2>
-      <h3 class="col-start-2 col-span-1 mt-2">${article.subtitle || ''}</h3>
-      <div class="text-sm text-black/70 col-start-2 col-span-1 mt-2">
+      <h3 class="mt-2">${article.subtitle || ''}</h3>
+      <div class="text-sm text-black/70 mt-2">
         <address class="not-italic mt-1.5" rel="author">${article.author}</address>
-        <time datetime="${article.created_at}">
-          ${new Date(article.created_at).toLocaleDateString()}
-        </time>
+        <time datetime="${article.created_at}">${new Date(article.created_at).toLocaleDateString()}</time>
         <p class="mb-4 mt-1.5 whitespace-pre-wrap">${article.content}</p>
-      </div">
-        <div class="flex">
-        ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-almostwhite cursor-pointer">Edit</button>
-          <button class="delete-button bg-secondary text-almostwhite px-3 py-1 rounded hover:bg-hoveringS ml-2 cursor-pointer">Delete</button>` : ''}
-        </div>
-    </article>
-  `).join('\n');
+      </div>
+    </div>
+    <div class="col-span-2 row-start-2 flex space-x-2">
+      ${session ? `<button class="edit-button bg-primary hover:bg-hovering px-3 py-1 rounded text-almostwhite cursor-pointer">Edit</button>
+      <button class="delete-button bg-secondary text-almostwhite px-3 py-1 rounded hover:bg-hoveringS cursor-pointer">Delete</button>` : ''}
+    </div>
+  </article>
+`).join('\n');
 
   articlesContainer.innerHTML = articlesList;
 }
+
+main();
 
 document.addEventListener('click', async (e) => {
   if (e.target.classList.contains('edit-button')) {
@@ -92,12 +92,12 @@ document.addEventListener('click', async (e) => {
     document.getElementById('edit-content').value = article.content;
     document.getElementById('edit-author').value = article.author;
 
-    document.getElementById('edit-modal').classList.remove('hidden');
+    editModal.showModal();
   }
 });
 
 document.getElementById('cancel-edit').addEventListener('click', () => {
-  document.getElementById('edit-modal').classList.add('hidden');
+  editModal.close();
 });
 
 document.getElementById('edit-form').addEventListener('submit', async (e) => {
@@ -120,7 +120,7 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
     return;
   }
 
-  document.getElementById('edit-modal').classList.add('hidden');
+  editModal.close();
   main();
 });
 
@@ -149,7 +149,9 @@ document.addEventListener('click', async (e) => {
 });
 
 const addButton = document.getElementById('add-article-button');
-const addModal = document.getElementById('add-modal')
+
+const addModal = document.getElementById('add-modal');
+const editModal = document.getElementById('edit-modal');
 
 addButton.addEventListener('click', async () => {
   const { data: { session } } = await supabase.auth.getSession();
@@ -158,11 +160,11 @@ addButton.addEventListener('click', async () => {
     return;
   }
 
-  addModal.classList.remove('hidden');
+  addModal.showModal();
 });
 
 document.getElementById('cancel-add').addEventListener('click', () => {
-  addModal.classList.add('hidden')
+  addModal.close();
 });
 
 document.getElementById('add-form').addEventListener('submit', async (e) => {
@@ -183,21 +185,21 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
     return;
   }
 
-  addModal.classList.add('hidden');
+  addModal.close();
   document.getElementById('add-form').reset();
   main();
 });
 
-addModal.addEventListener('click', (e) => {
-  if (e.target === addModal) {
-    addModal.classList.add('hidden');
+addModal.addEventListener('click', e => {
+  const form = addModal.querySelector('form');
+  if (!form.contains(e.target)) {
+    addModal.close();
   }
 });
 
-const editModal = document.getElementById('edit-modal');
-
-editModal.addEventListener('click', (e) => {
-  if (e.target === editModal) {
-    editModal.classList.add('hidden');
+editModal.addEventListener('click', e => {
+  const form = editModal.querySelector('form');
+  if (!form.contains(e.target)) {
+    editModal.close();
   }
 });
