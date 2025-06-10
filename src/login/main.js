@@ -1,7 +1,7 @@
 import { supabase } from '../api-client.js';
 
 const form = document.getElementById('login-form');
-const message = document.getElementById('login-message');
+const loginMessage = document.getElementById('login-message');
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -15,11 +15,11 @@ form.addEventListener('submit', async (event) => {
   });
 
   if (error) {
-    message.textContent = 'Invalid login credentials';
-    message.classList.add('text-red-500');
+    loginMessage.textContent = 'Invalid login credentials';
+    loginMessage.classList.add('text-red-500');
   } else {
-    message.classList.remove('text-red-500');
-    message.textContent = 'Redirecting...'
+    loginMessage.classList.remove('text-red-500');
+    loginMessage.textContent = 'Redirecting...'
     setTimeout(() => {
       window.location.href = '../index.html';
     }, 1000);

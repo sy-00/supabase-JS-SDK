@@ -31,7 +31,7 @@ logoutButton.addEventListener('click', async () => {
     alert('You have been logged out');
     window.location.href = 'login/';
   } else {
-    console.error('An error occurred while logging out');
+    console.error('An error occurred while logging out', error);
   }
 });
 
@@ -48,7 +48,7 @@ async function main() {
 
   const articlesContainer = document.querySelector('.articles');
 
-  const leafIcon = `<img src="https://marketplace.canva.com/ARZ8E/MAFmAUARZ8E/1/tl/canva-natural-leaf-icon.-100%25-naturals-vector-image-MAFmAUARZ8E.png" alt="leaf icon" class="mr-3 w-6 h-6 flex-shrink-0" aria-hidden="true">`;
+  const leafIcon = `<img src="https://marketplace.canva.com/ARZ8E/MAFmAUARZ8E/1/tl/canva-natural-leaf-icon.-100%25-naturals-vector-image-MAFmAUARZ8E.png" class="mr-3 w-6 h-6 flex-shrink-0" aria-hidden="true">`;
 
 const articlesList = articles.map((article) => `
   <article class="article py-6 border-b-10 border-pageBG bg-secondary/50 rounded p-6 grid grid-cols-[auto_1fr] grid-rows-[auto_auto] gap-x-3 gap-y-2" data-id="${article.id}">
@@ -82,7 +82,7 @@ document.addEventListener('click', async (e) => {
     const { data: article, error } = await supabase.from('article').select('*').eq('id', id).single();
 
     if (error) {
-      console.error('Failed to fetch the article');
+      console.error('Failed to fetch the article', error);
       return;
     }
 
@@ -116,7 +116,7 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
     .eq('id', id);
 
   if (error) {
-    console.error('Failed to update the article');
+    console.error('Failed to update the article', error);
     return;
   }
 
@@ -139,7 +139,7 @@ document.addEventListener('click', async (e) => {
     .eq('id', id);
 
     if (error) {
-      console.error("Failed to delete the article")
+      console.error("Failed to delete the article", error)
       return;
     }
 
@@ -181,7 +181,7 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
   ]);
 
   if (error) {
-    console.error('Failed to add the article')
+    console.error('Failed to add the article', error)
     return;
   }
 
