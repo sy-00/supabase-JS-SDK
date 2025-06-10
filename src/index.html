@@ -32,82 +32,81 @@
           Add your article
         </button>
       </div>
-    </main>
     
-    <dialog id="edit-modal" class="backdrop:bg-white/30 backdrop:backdrop-blur-sm">
-      <div class="fixed inset-0 flex items-center justify-center p-4">
-        <form id="edit-form" method="dialog" class="bg-almostwhite p-6 rounded w-full max-w-md space-y-4">
-          <h2 class="text-xl font-semibold">Edit article</h2>
-            
-          <input type="hidden" id="edit-id" />
+      <dialog id="edit-modal" class="backdrop:bg-white/30 backdrop:backdrop-blur-sm">
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+          <form id="edit-form" method="dialog" class="bg-almostwhite p-6 rounded w-full max-w-md space-y-4">
+            <h2 class="text-xl font-semibold">Edit article</h2>
+              
+            <input type="hidden" id="edit-id" />
 
-          <div>
-            <label for="edit-title" class="block mb-1 font-medium">Title:</label>
-            <input type="text" id="edit-title" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
-          </div>
+            <div>
+              <label for="edit-title" class="block mb-1 font-medium">Title:</label>
+              <input type="text" id="edit-title" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
 
-          <div>
-            <label for="edit-subtitle" class="block mb-1 font-medium">Subtitle:</label>
-            <input type="text" id="edit-subtitle" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
-          </div>
+            <div>
+              <label for="edit-subtitle" class="block mb-1 font-medium">Subtitle:</label>
+              <input type="text" id="edit-subtitle" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
 
-          <div>
-            <label for="edit-content" class="block mb-1 font-medium">Content:</label>
-            <textarea id="edit-content" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-          </div>
+            <div>
+              <label for="edit-content" class="block mb-1 font-medium">Content:</label>
+              <textarea id="edit-content" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+            </div>
 
-          <div>
-            <label for="edit-author" class="block mb-1 font-medium">Author:</label>
-            <input type="text" id="edit-author" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
-          </div>
+            <div>
+              <label for="edit-author" class="block mb-1 font-medium">Author:</label>
+              <input type="text" id="edit-author" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
 
-          <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
-            <button type="button" id="cancel-edit" class="px-4 py-2 bg-secondary hover:bg-hoveringS rounded cursor-pointer text-almostwhite">
-              Cancel
-            </button>
-            <button type="submit" class="px-4 py-2 bg-primary hover:bg-hovering rounded cursor-pointer text-almostwhite">
-              Save
-            </button>
-          </div>
-      </form>
-    </dialog>
+            <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
+              <button type="button" id="cancel-edit" class="px-4 py-2 bg-secondary hover:bg-hoveringS rounded cursor-pointer text-almostwhite">
+                Cancel
+              </button>
+              <button type="submit" class="px-4 py-2 bg-primary hover:bg-hovering rounded cursor-pointer text-almostwhite">
+                Save
+              </button>
+            </div>
+        </form>
+      </dialog>
 
-    <dialog id="add-modal" class="backdrop:bg-white/30 backdrop:backdrop-blur-sm">
-      <div class="fixed inset-0 flex items-center justify-center p-4">
-        <form id="add-form" method="dialog" class="bg-almostwhite p-6 rounded w-full max-w-md space-y-4">
-          <h2 class="text-xl font-semibold">New article</h2>
+      <dialog id="add-modal" class="backdrop:bg-white/30 backdrop:backdrop-blur-sm">
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+          <form id="add-form" method="dialog" class="bg-almostwhite p-6 rounded w-full max-w-md space-y-4">
+            <h2 class="text-xl font-semibold">New article</h2>
 
-          <div>
-            <label for="add-title" class="block mb-1 font-medium">Title:</label>
-            <input type="text" id="add-title" placeholder="Your article title" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
-          </div>
+            <div>
+              <label for="add-title" class="block mb-1 font-medium">Title:</label>
+              <input type="text" id="add-title" placeholder="Your article title" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
 
-          <div>
-            <label for="add-subtitle" class="block mb-1 font-medium">Subtitle:</label>
-            <input type="text" id="add-subtitle" placeholder="Article subtitle" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
-          </div>
+            <div>
+              <label for="add-subtitle" class="block mb-1 font-medium">Subtitle:</label>
+              <input type="text" id="add-subtitle" placeholder="Article subtitle" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
 
-          <div>
-            <label for="add-content" class="block mb-1 font-medium">Content:</label>
-            <textarea id="add-content" placeholder="Your article content" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-          </div>
+            <div>
+              <label for="add-content" class="block mb-1 font-medium">Content:</label>
+              <textarea id="add-content" placeholder="Your article content" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+            </div>
 
-          <div>
-            <label for="add-author" class="block mb-1 font-medium">Author:</label>
-            <input type="text" id="add-author" placeholder="Your article author" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
-          </div>
+            <div>
+              <label for="add-author" class="block mb-1 font-medium">Author:</label>
+              <input type="text" id="add-author" placeholder="Your article author" required class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
 
-          <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
-            <button type="button" id="cancel-add" class="px-4 py-2 bg-secondary hover:bg-hoveringS rounded cursor-pointer text-almostwhite">
-              Cancel
-            </button>
-            <button type="submit" class="px-4 py-2 bg-primary hover:bg-hovering rounded cursor-pointer text-almostwhite">
-              Add
-            </button>
-          </div>
-      </form>
-    </dialog>
-
+            <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
+              <button type="button" id="cancel-add" class="px-4 py-2 bg-secondary hover:bg-hoveringS rounded cursor-pointer text-almostwhite">
+                Cancel
+              </button>
+              <button type="submit" class="px-4 py-2 bg-primary hover:bg-hovering rounded cursor-pointer text-almostwhite">
+                Add
+              </button>
+            </div>
+        </form>
+      </dialog>
+    </main>
 
     <footer class="bg-almostwhite text-gray-700 text-center py-4 text-sm italic mt-6">
       Built with limited skills but unlimited hope
